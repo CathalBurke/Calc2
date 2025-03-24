@@ -46,4 +46,26 @@ void testAddFail() {
         });
         assertEquals("Your values are too large", ex.getMessage());
     }
+    @Test
+    void testMultiplySuccess(){
+        // 4 * 5 should equal 20
+        assertEquals(20, myCalc.multiply(4,5));
+    }
+    @Test
+    void testMultiplyOverflow() {
+        // Forces result > Integer.MAX_VALUE
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> {
+            myCalc.multiply(Integer.MAX_VALUE, 2);
+        });
+        assertEquals("Your values are too large", ex.getMessage());
+    }
+
+    @Test
+    void testMultiplyUnderflow() {
+        // Forces result < Integer.MIN_VALUE
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> {
+            myCalc.multiply(Integer.MIN_VALUE, 2);
+        });
+        assertEquals("Your values are too large", ex.getMessage());
+    }
 }
