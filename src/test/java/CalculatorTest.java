@@ -68,4 +68,31 @@ void testAddFail() {
         });
         assertEquals("Your values are too large", ex.getMessage());
     }
+    @Test
+    void testDivideSuccess(){
+        // 8 / 4 should equal 2
+        assertEquals(2, myCalc.divide(8,4));
+    }
+
+    @Test
+    void testDivideByZero(){
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> {
+            myCalc.divide(4, 0);
+        });
+        assertEquals("Cannot divide by zero", ex.getMessage());
+    }
+
+    @Test
+    void testDivideOverflow(){
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> {
+            myCalc.divide(Integer.MIN_VALUE, -1);
+        });
+        assertEquals("Your values are too large", ex.getMessage());
+    }
+    @Test
+    void testDivideMinValueNoOverflow() {
+        // This ensures numerator == Integer.MIN_VALUE, but denominator != -1
+        // so the "if" check is false overall
+        assertEquals(Integer.MIN_VALUE, myCalc.divide(Integer.MIN_VALUE, 1));
+    }
 }

@@ -23,4 +23,14 @@ public class Calculator {
         }
         return (int) result;
     }
+    public int divide(int numerator, int denominator) {
+        if(denominator == 0) {
+            throw new IllegalArgumentException("Cannot divide by zero");
+        }
+        // Check for overflow: Integer.MIN_VALUE / -1
+        if(numerator == Integer.MIN_VALUE && denominator == -1) {
+            throw new IllegalArgumentException("Your values are too large");
+        }
+        return numerator / denominator;
+    }
 }
